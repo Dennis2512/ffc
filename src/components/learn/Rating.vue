@@ -40,7 +40,6 @@ export default class Rating extends RatingProps {
   setRating(n: number) {
     this.numberOfSelectedStar = n;
     this.$emit("rated", n, true);
-    this.$emit('moveToNext');
   }
 }
 </script>
