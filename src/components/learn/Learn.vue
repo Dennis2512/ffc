@@ -61,7 +61,7 @@ const LearnProps = Vue.extend({
   }
 })
 export default class Learn extends LearnProps {
-  numberOfStarsInRating = 5;
+  numberOfStarsInRating = 2;
   learningSessionManager = new LearningSessionManager([]);
   isLearningSessionFinishedAndComponentWillBeDestroyedSoon = false;
   curLearningElement = {
@@ -163,7 +163,7 @@ export default class Learn extends LearnProps {
       };
     } else {
       return {
-        text: "Next",
+        text: "SKIP",
         color: "grey lighten-1"
       };
     }
@@ -201,9 +201,8 @@ export default class Learn extends LearnProps {
 
   getBarsForFinishLearningDialog(): CustomDialogOptionsBarChartBar[] {
     const bars = [];
-    for (let rating = 1; rating <= this.numberOfStarsInRating; rating++) {
-      bars.push({ name: `${rating}`, value: 0 });
-    }
+    bars.push({ name: `wrong`, value: 0 });
+    bars.push({ name: `right`, value: 0 });
     for (const element of this.learningSessionManager.learningSession
       .elements) {
       if (element.rating?.r !== undefined) {
