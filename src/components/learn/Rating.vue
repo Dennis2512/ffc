@@ -35,11 +35,12 @@ export default class Rating extends RatingProps {
   onClickStar(n: number) {
     this.numberOfSelectedStar = n;
     this.$emit("rated", n);
-    //Learn.moveToNext() 
+    
   }
   setRating(n: number) {
     this.numberOfSelectedStar = n;
     this.$emit("rated", n, true);
+    this.$emit('moveToNext');
   }
 }
 </script>

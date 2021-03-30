@@ -28,6 +28,7 @@
 
 <script lang="ts">
 import Vue from "vue";
+import Vuex from "vuex";
 import Component from "vue-class-component";
 
 import Rating from "./Rating.vue";
@@ -182,6 +183,7 @@ export default class Learn extends LearnProps {
     const r = this.mapRatingFromStarsTo100(rating);
     this.learningSessionManager.saveRatingForCurrentLearningSessionElement(r);
     saveLearningSessionManagerDataToLocalStorage(this.learningSessionManager);
+    this.moveToNext();
   }
 
   mapRatingFromStarsTo100(rating: number): number {
