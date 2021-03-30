@@ -1,17 +1,19 @@
 <template>
   <div class="rating">
-    <div v-for="n in numberOfStars" :key="n" class="star-wrapper">
-      <span
-        class="overline grey--text text--darken-1"
-        :class="{ 'invisible': (n !== 1 && n !== numberOfStars) }"
-      >{{ n === 1 ? "falsch" : "richtig" }}</span>
-      <svg class="star" :class="{ 'filled': (numberOfSelectedStar >= n) }" viewBox="0 0 100 100">
-        <!-- two circles, radius 18% and 42%, 72 degree steps -->
-        <polygon
-          points="50,10 39.4,35.4 10.1,37 32.9,55.6 25.3,84 50,68, 74.7,84 67.1,55.6 89.9,37 60.6,35.4"
-          @click="onClickStar(n)"
-        />
-      </svg>
+    <div class="star-wrapper">
+      <table>
+        <tr>
+          <th class="overline grey--text text--darken-1"><button  @click="onClickStar(1)" class="mib-f">
+       WRONG
+     </button></th>
+          <th class="overline grey--text text--darken-1"><button  @click="onClickStar(2)" class="mib-r">
+       RIGHT
+       
+     </button></th>
+        </tr>
+      </table>
+     
+     
     </div>
   </div>
 </template>
@@ -19,6 +21,7 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
+import Learn from "./Learn.vue";
 
 const RatingProps = Vue.extend({
   props: {
@@ -32,6 +35,7 @@ export default class Rating extends RatingProps {
   onClickStar(n: number) {
     this.numberOfSelectedStar = n;
     this.$emit("rated", n);
+    //Learn.moveToNext() 
   }
   setRating(n: number) {
     this.numberOfSelectedStar = n;
@@ -75,5 +79,27 @@ svg.star polygon {
   fill: #222;
   stroke: #fc0;
   transition: 0.5s;
+}
+
+.svg-f {
+  fill: #222;
+  stroke: rgb(255, 0, 0);
+  transition: 0.5s;
+}
+
+.svg-r {
+  fill: #222;
+  stroke: rgb(0, 255, 0);
+  transition: 0.5s;
+}
+
+.mib-r{
+  font-size: 20px;
+  color: rgb(124, 253, 142);
+}
+
+.mib-f{
+  font-size: 20px;
+  color: rgb(255, 115, 115);
 }
 </style>

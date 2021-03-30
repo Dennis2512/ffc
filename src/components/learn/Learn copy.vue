@@ -148,7 +148,7 @@ export default class Learn extends LearnProps {
     return endOfSession;
   }
 
-  moveToNext() {
+  public moveToNext() {
     if (this.checkIfCardIsEndOfSession()) {
       this.finishSession();
     }
@@ -201,8 +201,9 @@ export default class Learn extends LearnProps {
 
   getBarsForFinishLearningDialog(): CustomDialogOptionsBarChartBar[] {
     const bars = [];
-    bars.push({ name: `wrong`, value: 0 });
-    bars.push({ name: `right`, value: 0 });
+    for (let rating = 1; rating <= this.numberOfStarsInRating; rating++) {
+      bars.push({ name: `${rating}`, value: 0 });
+    }
     for (const element of this.learningSessionManager.learningSession
       .elements) {
       if (element.rating?.r !== undefined) {
