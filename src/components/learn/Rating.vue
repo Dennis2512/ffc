@@ -4,7 +4,7 @@
       <span
         class="overline grey--text text--darken-1"
         :class="{ 'invisible': (n !== 1 && n !== numberOfStars) }"
-      >{{ n === 1 ? "Hard" : "Easy" }}</span>
+      >{{ n === 1 ? "falsch" : "richtig" }}</span>
       <svg class="star" :class="{ 'filled': (numberOfSelectedStar >= n) }" viewBox="0 0 100 100">
         <!-- two circles, radius 18% and 42%, 72 degree steps -->
         <polygon

@@ -61,7 +61,7 @@ const LearnProps = Vue.extend({
   }
 })
 export default class Learn extends LearnProps {
-  numberOfStarsInRating = 5;
+  numberOfStarsInRating = 2;
   learningSessionManager = new LearningSessionManager([]);
   isLearningSessionFinishedAndComponentWillBeDestroyedSoon = false;
   curLearningElement = {
