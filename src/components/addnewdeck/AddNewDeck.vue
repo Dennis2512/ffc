@@ -17,7 +17,7 @@ import Component from "vue-class-component";
 
 import ImportDeckFromURL from "./ImportDeckFromURL.vue";
 import ImportDeckFromFile from "./ImportDeckFromFile.vue";
-import ThirdPartyDeckCard from "./ThirdPartyDeckCard.vue"
+import ThirdPartyDeckCard from "./ThirdPartyDeckCard.vue";
 import DeckCreator from "./DeckCreator.vue";
 
 @Component({
