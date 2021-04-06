@@ -36,6 +36,11 @@ const routes: Array<RouteConfig> = [
     path: '/about',
     name: 'About',
     component: () => import('../views/About.vue'),
+  },
+  {
+    path: '/carddeckcreator',
+    name: 'CardDeckCreator',
+    component: () => import('../components/carddeckcreator/CardDeckCreator.vue'),
   }
 ];
 

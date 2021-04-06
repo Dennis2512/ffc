@@ -5,6 +5,11 @@
       <v-card-text>
         <p>You will be able to natively create a new deck here.</p>
       </v-card-text>
+      <div class="horizontal-spacer"></div>
+      <v-card-actions class="button-padding">
+        <v-spacer></v-spacer>
+        <v-btn color="success" right @click="$router.push('carddeckcreator')">Create a new deck</v-btn>
+      </v-card-actions>
     </v-card>
   </v-col>
 </template>
@@ -18,4 +23,17 @@ export default class DeckCreator extends Vue {}
 </script>
 
 <style scoped>
+#file-input-wrapper {
+  padding-bottom: 0;
+}
+.button-padding {
+  padding: 16px;
+}
+.v-card {
+  display: flex;
+  flex-direction: column;
+}
+.horizontal-spacer {
+  flex-grow: 1;
+}
 </style>
