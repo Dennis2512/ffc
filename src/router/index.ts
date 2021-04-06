@@ -45,7 +45,7 @@ const routes: Array<RouteConfig> = [
   {
     path: '/licenses',
     name: 'Licenses',
-    component: () => import('../components/licences/Licenses.vue'),
+    component: () => import('../components/licenses/Licenses.vue'),
   }
 ];
 
