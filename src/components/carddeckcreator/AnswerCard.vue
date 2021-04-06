@@ -1,6 +1,6 @@
 <template>
   <v-col cols="12" sm="12" md="6" lg="6" xl="6">
-    <v-card height="100%" raised>
+    <v-card class="color" height="100%" raised>
       <v-card-title>Answer (back side)</v-card-title>
       <v-card-text>
         <p>Please enter your answer. This will be the back of your card.</p>
@@ -9,11 +9,13 @@
       <div class="container">
         <TextEditor/>
       </div>
+      <!--
       <div class="horizontal-spacer"></div>
       <v-card-actions class="button-padding">
         <v-spacer></v-spacer>
         <v-btn color="red" @click="clearTextfield" right>Clear Textfield</v-btn>
       </v-card-actions>
+      -->
     </v-card>
   </v-col>
 </template>
@@ -42,5 +44,8 @@ export default class AnswerCard extends Vue {}
 }
 .horizontal-spacer {
   flex-grow: 1;
+}
+.color {
+  background: #282828;
 }
 </style>

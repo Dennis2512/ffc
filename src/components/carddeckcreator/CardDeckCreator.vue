@@ -1,11 +1,13 @@
 <template>
   <div>
     <v-container fluid>
-      <v-row>
-        <QuestionCard/>
-        <AnswerCard/>
-      </v-row>
+      <DeckCredentials class="header"/>
+      <DynamicCard class="header"/>
     </v-container>
+    <v-btn @click="saveCards" color="green" fixed right bottom>Save and finish</v-btn>      
+    <v-btn @click="addNewCard" fab elevation="2" dark large color="green" fixed left bottom>
+        <v-icon>mdi-plus</v-icon>
+    </v-btn>
   </div>
 </template>
 
@@ -13,18 +15,29 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 
-import QuestionCard from "./QuestionCard.vue";
-import AnswerCard from "./AnswerCard.vue";
+import DynamicCard from "./DynamicCard.vue";
+import DeckCredentials from "./DeckCredentials.vue";
 
 @Component({
   components: {
-    QuestionCard,
-    AnswerCard
+    DeckCredentials,
+    DynamicCard
   }
 })
 
-export default class CardDeckCreator extends Vue {}
+export default class CardDeckCreator extends Vue {
+  addNewCard() {
+    // Add a new Card dynamically
+  }
+  saveCards() {
+    // Save cards as deck and close page
+  }
+}
 </script>
 
 <style scoped>
+.header {
+  max-width: 100%;
+  padding: 0;
+}
 </style>
