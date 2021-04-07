@@ -5,7 +5,7 @@
       <DynamicCard class="header"/>
     </v-container>
     <v-btn @click="saveCards" color="green" fixed right bottom>Save and finish</v-btn>      
-    <v-btn @click="addNewCard" fab elevation="2" dark large color="green" fixed left bottom>
+    <v-btn @click="addNewCard" fab elevation="2" dark color="green" fixed left bottom>
         <v-icon>mdi-plus</v-icon>
     </v-btn>
   </div>

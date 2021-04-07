@@ -3,9 +3,12 @@
     <v-card class="padding" raised>
       <v-card-actions>
       <v-card-title style="cursor: pointer" @click="show = !show">Card 0</v-card-title>
-      <v-spacer></v-spacer>
       <v-btn icon @click="show = !show">
         <v-icon>{{ show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
+      </v-btn>
+      <v-spacer></v-spacer>
+      <v-btn icon @click="deleteCard">
+        <v-icon color="red">mdi-delete</v-icon>
       </v-btn>
       </v-card-actions>
       <v-expand-transition>
@@ -44,7 +47,10 @@ export default class DynamicCard extends Vue {
         return {
           show: false,
         }
-  }
+    }
+    deleteCard() {
+      // Delete specific card and decrease the card number of following cards
+    }
 }
 </script>
 
