@@ -6,38 +6,82 @@
         <p>Please enter your credentials. These are mendatory.</p>
       </v-card-text>
       <div class="horizontal-spacer"></div>
-        <v-container>
+      <v-container>
+        <v-form v-model="valid">
           <v-row>
             <v-col cols="12" sm="3">
-              <v-text-field label="Author(s)" placeholder="John Doe" color="green" outlined clearable required></v-text-field>
+              <v-text-field
+                label="Author(s)"
+                placeholder="John Doe"
+                color="green"
+                outlined
+                clearable
+                required
+                :rules="rules"
+                autocomplete="off"
+              ></v-text-field>
             </v-col>
             <v-col cols="12" sm="2">
-              <v-text-field label="Version" placeholder="1.0" color="green" outlined clearable></v-text-field>
+              <v-text-field
+                label="Version"
+                placeholder="1.0"
+                color="green"
+                outlined
+                clearable
+                :rules="rules"
+                autocomplete="off"
+              ></v-text-field>
             </v-col>
             <v-col cols="12" sm="3">
-              <v-text-field label="CardDeck UUID" hint="optional" color="blue" outlined clearable></v-text-field>
+              <v-text-field
+                label="CardDeck UUID"
+                hint="optional"
+                color="blue"
+                outlined
+                clearable
+                autocomplete="off"
+              ></v-text-field>
             </v-col>
             <v-col cols="12" sm="4">
-              <v-text-field label="CardDeck Name" placeholder="FFC Deck" color="green" outlined clearable></v-text-field>
+              <v-text-field
+                label="CardDeck Name"
+                placeholder="FFC Deck"
+                color="green"
+                outlined
+                clearable
+                :rules="rules"
+                autocomplete="off"
+              ></v-text-field>
             </v-col>
           </v-row>
           <v-row>
             <v-col cols="12" sm="12">
-              <v-text-field label="CardDeck Description" placeholder="This CardDeck is for educational purpose." color="green" outlined clearable></v-text-field>
+              <v-text-field
+                label="CardDeck Description"
+                placeholder="This CardDeck is for educational purpose."
+                color="green"
+                outlined
+                clearable
+                autocomplete="false"
+                :rules="rules"
+              ></v-text-field>
             </v-col>
           </v-row>
-        </v-container>
+        </v-form>
+      </v-container>
     </v-card>
   </v-col>
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
+import Vue from 'vue'
+import Component from 'vue-class-component'
 
 @Component({})
-
-export default class Credentials extends Vue {}
+export default class Credentials extends Vue {
+  valid = false
+  rules = [(v: string) => !!v || 'This field is required']
+}
 </script>
 
 <style scoped>
