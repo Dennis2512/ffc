@@ -1,8 +1,13 @@
 <template>
 <div>
+  <!-- Definition of the single Cardview -->
     <v-card class="padding" raised>
       <v-card-actions>
-      <v-card-title style="cursor: pointer" @click="show = !show">Card 0</v-card-title>
+        <!-- Title of the Card: normaly -> Card x. !-->
+        <!-- The function to toggle the full Card view is implemented here -->
+      <v-card-title style="cursor: pointer" @click="show = !show">{{
+          card.title
+        }}</v-card-title>
       <v-btn icon @click="show = !show">
         <v-icon>{{ show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
       </v-btn>
@@ -16,6 +21,7 @@
       <v-divider></v-divider>
       <div>
         <v-container fluid>
+        <!-- Markdown Editors -->
         <v-row>
             <QuestionCard/>
             <AnswerCard/>
@@ -29,28 +35,37 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
-
 import QuestionCard from "./QuestionCard.vue";
 import AnswerCard from "./AnswerCard.vue";
 
-@Component({
+export default {
+  // components used 
   components: {
     QuestionCard,
     AnswerCard
-  }
-})
+  },
 
-export default class DynamicCard extends Vue {
-    data() {
-        return {
-          show: false,
-        }
+  // needed coming into this Object
+  props: {
+    card: Object,
+  },
+  
+  //data returned from this object
+  data(){
+    return {
+      show: false,
+      pc: this.card
     }
+  },
+
+  //methods used in this Vue file.
+  methods: {
     deleteCard() {
       // Delete specific card and decrease the card number of following cards
+      this.pc.question = "Test"
+      console.log(this.pc)
     }
+  }
 }
 </script>
 
