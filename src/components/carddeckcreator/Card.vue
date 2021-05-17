@@ -109,7 +109,7 @@ export default {
         'answerChange',
         this.$refs[this.card.title + '_answer'].invoke('getHtml')
       )
-    },
+    }
   },
 }
 </script>

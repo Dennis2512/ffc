@@ -3,7 +3,8 @@
     <v-container fluid style="padding-bottom: 80px">
       <!-- Display all the Cards in a seperate DynamicCard  -->
       <!-- dynamicCard defined in a different file -->
-      <DeckCredentials class="header" ref="creds" />
+      <DeckCredentials id="deckcredentials" class="header" ref="creds" />
+
       <Card
         v-for="(card, index) in cards"
         :key="card.title + index"
@@ -18,6 +19,9 @@
     <!-- Buttons that save the current Carddeck and to create a new Card -->
     <v-btn @click="saveCards" color="green" fixed right bottom
       >Save and finish</v-btn
+    >
+     <v-btn @click="logsmth" color="green" 
+      >log</v-btn
     >
     <v-btn
       @click="addNewCard"
@@ -50,23 +54,26 @@ export default {
     return {
       cards: [
         {
-          title: 'Card 1',
+          title: 'Card 0',
           question: '',
           answer: '',
         },
         {
-          title: 'Card 2',
+          title: 'Card 1',
           question: '',
           answer: '',
         },
       ],
     }
   },
+
   //Methods needed in this file
   methods: {
+    
     addNewCard() {
+      const counter = this.cards.length
       this.cards.push({
-        title: 'New Card',
+        title: 'Card ' + counter,
         question: '',
         answer: '',
       })
@@ -77,12 +84,20 @@ export default {
         download(data, 'deck.json', data)
         router.push("/")
       }
-      
-
-
     },
+    logsmth(){
+      //const data = this.cards.length
+      //console.log(data);
+      const data = this.$refs.creds.getData();
+      console.log(data)
+    }, 
+
     deleteCard(index) {
       this.cards.splice(index, 1)
+      // reassign Card numbers after deleting a certain one
+      for( let i = 0; i < this.cards.length; i++){
+          this.cards[i].title = "Card " + i
+      }
     },
     onQuestionChanged(question, index) {
       this.cards[index].question = question

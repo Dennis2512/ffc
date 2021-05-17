@@ -11,6 +11,8 @@
           <v-row>
             <v-col cols="12" sm="3">
               <v-text-field
+                id="author"
+                v-model="author"
                 label="Author(s)"
                 placeholder="John Doe"
                 color="green"
@@ -23,6 +25,7 @@
             </v-col>
             <v-col cols="12" sm="2">
               <v-text-field
+                v-model="version"
                 label="Version"
                 placeholder="1.0"
                 color="green"
@@ -34,6 +37,7 @@
             </v-col>
             <v-col cols="12" sm="3">
               <v-text-field
+                v-model="uuid"
                 label="CardDeck UUID"
                 hint="optional"
                 color="blue"
@@ -44,6 +48,7 @@
             </v-col>
             <v-col cols="12" sm="4">
               <v-text-field
+                v-model="deckname"
                 label="CardDeck Name"
                 placeholder="FFC Deck"
                 color="green"
@@ -57,6 +62,7 @@
           <v-row>
             <v-col cols="12" sm="12">
               <v-text-field
+                v-model="description"
                 label="CardDeck Description"
                 placeholder="This CardDeck is for educational purpose."
                 color="green"
@@ -78,10 +84,45 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 
 @Component({})
+
 export default class Credentials extends Vue {
   valid = false
-  rules = [(v: string) => !!v || 'This field is required']
+  rules = [(v: string) => !!v || 'This field is required']  
+  
+  author = ""
+  version =""
+  uuid=""
+  deckname=""
+  description=""
+
+
+  public test (){
+    console.log("hi")
+  }
+
+  public getData(){
+    console.log(this.author);
+    if(this.valid){
+      const data = {
+      "author": this.author,
+      "version": this.version,
+      "uuid": this.uuid,
+      "deck_name": this.deckname,
+      "description": this.deckname
+    }
+      return data;
+
+    }else {
+      return null;
+    }
+
+  }
+
+
+
+
 }
+
 </script>
 
 <style scoped>
