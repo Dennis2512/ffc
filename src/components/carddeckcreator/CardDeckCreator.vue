@@ -38,6 +38,7 @@
 import DeckCredentials from './DeckCredentials.vue'
 import Card from './Card.vue'
 import download from 'downloadjs'
+import router from '@/router'
 
 export default {
   //the components that used in this file
@@ -74,7 +75,11 @@ export default {
       if (this.$refs.creds.valid) {
         const data = JSON.stringify(this.cards)
         download(data, 'deck.json', data)
+        router.push("/")
       }
+      
+
+
     },
     deleteCard(index) {
       this.cards.splice(index, 1)
