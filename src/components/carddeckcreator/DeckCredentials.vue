@@ -100,22 +100,42 @@ export default class Credentials extends Vue {
     console.log("hi")
   }
 
-  public getData(){
-    console.log(this.author);
+
+  public getAuthor(){
     if(this.valid){
-      const data = {
-      "author": this.author,
-      "version": this.version,
-      "uuid": this.uuid,
-      "deck_name": this.deckname,
-      "description": this.deckname
+      return this.author 
     }
-      return data;
+    else{return null}
+  }
 
-    }else {
-      return null;
+  public getVersion(){
+    if(this.valid){
+      return this.version
     }
+      else{return null}
+  }
 
+  public getUUID(){ 
+    if(this.valid){
+      return this.uuid
+  }else{
+    return null}
+  }
+
+  public getDeckname(){
+    if(this.valid){
+      return this.deckname
+    }else{
+      return null
+    }
+  }
+
+  public getDescription(){
+    if(this.valid){
+      return this.description
+    }else{
+      return null
+    }
   }
 
 

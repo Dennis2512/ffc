@@ -6,8 +6,9 @@
       <DeckCredentials id="deckcredentials" class="header" ref="creds" />
 
       <Card
+        :id="index"
         v-for="(card, index) in cards"
-        :key="card.title + index"
+        :key="index"
         :card="card"
         class="header"
         @delete="deleteCard(index)"
@@ -20,9 +21,7 @@
     <v-btn @click="saveCards" color="green" fixed right bottom
       >Save and finish</v-btn
     >
-     <v-btn @click="logsmth" color="green" 
-      >log</v-btn
-    >
+    <v-btn @click="logsmth" color="green">log</v-btn>
     <v-btn
       @click="addNewCard"
       fab
@@ -39,10 +38,10 @@
 </template>
 
 <script>
-import DeckCredentials from './DeckCredentials.vue'
-import Card from './Card.vue'
-import download from 'downloadjs'
-import router from '@/router'
+import DeckCredentials from "./DeckCredentials.vue";
+import Card from "./Card.vue";
+import download from "downloadjs";
+import router from "@/router";
 
 export default {
   //the components that used in this file
@@ -52,61 +51,102 @@ export default {
   },
   data() {
     return {
-      cards: [
-        {
-          title: 'Card 0',
-          question: '',
-          answer: '',
-        },
-        {
-          title: 'Card 1',
-          question: '',
-          answer: '',
-        },
-      ],
-    }
+      cards: [],
+    };
   },
 
   //Methods needed in this file
   methods: {
-    
     addNewCard() {
-      const counter = this.cards.length
+      //const counter = this.cards.length
       this.cards.push({
-        title: 'Card ' + counter,
-        question: '',
-        answer: '',
-      })
+        //title: counter,
+        q: "",
+        a: "",
+      });
     },
+
     saveCards() {
       if (this.$refs.creds.valid) {
-        const data = JSON.stringify(this.cards)
-        download(data, 'deck.json', data)
-        router.push("/")
+        const author = this.$refs.creds.getAuthor();
+        const version = this.$refs.creds.getVersion();
+        const uuid = this.$refs.creds.getUUID();
+        const deckname = this.$refs.creds.getDeckname();
+        const description = this.$refs.creds.getDescription();
+        const length = this.cards.length + 1;
+
+        const data = {
+          meta: {
+            author: author,
+            version: version,
+            uuid: uuid,
+          },
+          decks: {
+            d0: {
+              meta: {
+                deck_name: deckname,
+                next_card_id: length,
+                description: description,
+              },
+              cards: {},
+            },
+          },
+        };
+
+        this.cards.forEach((card, index) => (data.decks.d0.cards[index] = card));
+
+        const object = JSON.stringify(data);
+        download(object, "deck.json", object);
+
+
+        router.push("/");
       }
     },
-    logsmth(){
+    logsmth() {
       //const data = this.cards.length
       //console.log(data);
-      const data = this.$refs.creds.getData();
-      console.log(data)
-    }, 
+      //const data = this.$refs.creds.getData();
+      //console.log(data.author)
+      const author = this.$refs.creds.getAuthor();
+      const version = this.$refs.creds.getVersion();
+      const uuid = this.$refs.creds.getUUID();
+      const deckname = this.$refs.creds.getDeckname();
+      const description = this.$refs.creds.getDescription();
+      const length = this.cards.length + 1;
+
+      const data = {
+        meta: {
+          author: author,
+          version: version,
+          uuid: uuid,
+        },
+        decks: {
+          d0: {
+            meta: {
+              deck_name: deckname,
+              next_card_id: length,
+              description: description,
+            },
+            cards: {},
+          },
+        },
+      };
+
+      this.cards.forEach((card, index) => (data.decks.cards[index] = card));
+      console.log(data);
+    },
 
     deleteCard(index) {
-      this.cards.splice(index, 1)
-      // reassign Card numbers after deleting a certain one
-      for( let i = 0; i < this.cards.length; i++){
-          this.cards[i].title = "Card " + i
-      }
+      this.cards.splice(index, 1);
     },
     onQuestionChanged(question, index) {
-      this.cards[index].question = question
+      this.cards[index].q = question;
     },
     onAnswerChanged(answer, index) {
-      this.cards[index].answer = answer
+      this.cards[index].a = answer;
     },
   },
-}
+};
 </script>
 
 <style scoped>

@@ -3,7 +3,7 @@
     <v-card>
       <v-card-actions>
         <v-card-title style="cursor: pointer" @click="show = !show">{{
-          card.title
+          id
         }}</v-card-title>
         <v-btn icon @click="show = !show">
           <v-icon>{{ show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
@@ -23,8 +23,8 @@
                 <div>
                   <v-card-title>Question</v-card-title>
                   <editor
-                    :ref="card.title + '_question'"
-                    :initialValue="card.question"
+                    :ref="card.title + '_q'"
+                    :initialValue="card.q"
                     :options="editorOptions"
                     initialEditType="wysiwyg"
                     placeholder="Type in your text..."
@@ -34,8 +34,8 @@
                 <div>
                   <v-card-title>Answer</v-card-title>
                   <editor
-                    :ref="card.title + '_answer'"
-                    :initialValue="card.answer"
+                    :ref="card.title + '_a'"
+                    :initialValue="card.a"
                     :options="editorOptions"
                     initialEditType="wysiwyg"
                     placeholder="Type in your text..."
@@ -58,7 +58,7 @@ export default {
   components: {
     editor: Editor,
   },
-  props: ['card'],
+  props: ['card', 'id'],
   data() {
     return {
       show: false,
@@ -95,19 +95,20 @@ export default {
     }
   },
   methods: {
+
     deleteCard() {
       this.$emit('delete')
     },
     questionChange() {
       this.$emit(
         'questionChange',
-        this.$refs[this.card.title + '_question'].invoke('getHtml')
+        this.$refs[this.card.title + '_q'].invoke('getHtml')
       )
     },
     answerChange() {
       this.$emit(
         'answerChange',
-        this.$refs[this.card.title + '_answer'].invoke('getHtml')
+        this.$refs[this.card.title + '_a'].invoke('getHtml')
       )
     }
   },
