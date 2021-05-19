@@ -130,11 +130,19 @@ export default class LearningSessionManager {
       }
     }
     this.learningSession.currentElementIndex++;
+    const currentLearningSessionElement = this.learningSession.elements[
+      this.learningSession.currentElementIndex
+    ];
+    currentLearningSessionElement.showAnswer = false;
   }
 
   moveToPrevLearningSessionElement(): void {
     if (this.learningSession.currentElementIndex > 0) {
       this.learningSession.currentElementIndex--;
+      const currentLearningSessionElement = this.learningSession.elements[
+        this.learningSession.currentElementIndex
+      ];
+      currentLearningSessionElement.showAnswer = false;
     }
   }
 

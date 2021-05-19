@@ -1,9 +1,20 @@
 <template>
   <div class="learn" v-if="numberOfSelectedDecks>0">
     <!-- v-if="numberOfSelectedDecks>0"; otherwise it will be shortly displayed before it is catched by beforeMount -->
+    
+    <!-- This is the normal Viewer
     <div class="max-height">{{ curLearningElement.card.q }}</div>
     <div class="max-height">
       <span v-if="curLearningElement.showAnswer">{{ curLearningElement.card.a }}</span>
+      <v-btn v-else @click="revealAnswer">Reveal Answer</v-btn>
+    </div> -->
+
+    <!-- This is the Toast UI Markdown Viewer -->
+    <!-- <text-viewer :key="inc" class="max-height" style="color: black" :text="curLearningElement.card.q"/> -->
+    <text-viewer v-if="renderComponent" class="max-height" style="color: black" :text="curLearningElement.card.q"/>
+    <div style="height: 10px"></div>
+    <div class="max-height" style="color: black">
+      <text-viewer v-if="curLearningElement.showAnswer" :text="curLearningElement.card.a"/>
       <v-btn v-else @click="revealAnswer">Reveal Answer</v-btn>
     </div>
 
@@ -30,6 +41,8 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import Component from "vue-class-component";
+
+import TextViewer from "./TextViewer.vue";
 
 import Rating from "./Rating.vue";
 import {
@@ -58,7 +71,8 @@ const LearnProps = Vue.extend({
 
 @Component({
   components: {
-    Rating
+    Rating,
+    TextViewer
   }
 })
 export default class Learn extends LearnProps {
@@ -76,6 +90,9 @@ export default class Learn extends LearnProps {
       a: ""
     }
   } as LearningSessionElement;
+
+  // inc = 0;
+  renderComponent = true;
 
   $refs!: {
     rating: Rating;
@@ -154,6 +171,7 @@ export default class Learn extends LearnProps {
       this.finishSession();
     }
     this.learningSessionManager.moveToNextLearningSessionElement();
+    this.forceRerender();
   }
 
   get buttonNext(): { text: string; color: string } {
@@ -172,10 +190,12 @@ export default class Learn extends LearnProps {
 
   moveToPrev() {
     this.learningSessionManager.moveToPrevLearningSessionElement();
+    this.forceRerender();
   }
 
   revealAnswer() {
     this.learningSessionManager.revealAnswerForCurrentLearningSessionElement();
+    // console.log(this.curLearningElement)
   }
 
   onRating(rating: number, programmatically = false) {
@@ -184,6 +204,19 @@ export default class Learn extends LearnProps {
     this.learningSessionManager.saveRatingForCurrentLearningSessionElement(r);
     saveLearningSessionManagerDataToLocalStorage(this.learningSessionManager);
     this.moveToNext();
+    // this.inc+=1;
+    // console.log(this.inc);
+    this.forceRerender();
+  }
+
+  forceRerender() {
+    // Remove my-component from the DOM
+    this.renderComponent = false;
+
+    this.$nextTick(() => {
+      // Add the component back in
+      this.renderComponent = true;
+    });
   }
 
   mapRatingFromStarsTo100(rating: number): number {
@@ -252,8 +285,13 @@ export default class Learn extends LearnProps {
   flex: 1 1 auto;
   overflow-y: auto;
   height: 0px;
-  align-items: center;
+  /* align-items: center; */
+  background-color: white;
   padding: 0 16px;
+}
+
+.max-width {
+  width: 100%;
 }
 
 .flex-center {
