@@ -33,6 +33,11 @@
   </p>
 </p>
 
+## Demo Video 
+
+To simplify the creation of card decks, a tutorial video is linked <a href="https://youtu.be/zPUoXkVYENY">here</a>.
+
+
 ## Screenshots
 
 <img src="docs/img/deck-selection.png" alt="Deck Selection" width="24%" /> <img src="docs/img/deck-selection-selected.png" alt="Deck Selection - one deck selected" width="24%" /> <img src="docs/img/q-and-a.png" alt="Card" width="24%" /> <img src="docs/img/finish.png" alt="Evaluation after finishing learning" width="24%" /> <img src="docs/img/menu.png" alt="Menu" width="24%" /> <img src="docs/img/import.png" alt="Import" width="24%" /> <img src="docs/img/third-party-decks.png" alt="Third Party Decks" width="24%" /> <img src="docs/img/add-decks.png" alt="Successfully add a Deck" width="24%" /> 
