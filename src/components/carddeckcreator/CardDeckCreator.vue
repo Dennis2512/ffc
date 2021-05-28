@@ -21,7 +21,7 @@
     <v-btn @click="saveCards" color="green" fixed right bottom
       >Save and finish</v-btn
     >
-    <v-btn @click="logsmth" color="green">log</v-btn>
+    <!-- <v-btn @click="logsmth" color="green">log</v-btn> -->
     <v-btn
       @click="addNewCard"
       fab
